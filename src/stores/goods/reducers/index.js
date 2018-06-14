@@ -4,8 +4,7 @@ const todosObj = {}
 todosObj[actions.SET_GOODS] = (state, action)=>action.goods;
 todosObj[actions.SET_FOOD_COUNT] = (goods, action)=>{
   goods[action.path[0]].foods[action.path[1]].count  =  action.count;
-  goods[action.path[0]].foods[action.path[1]] = {...goods[action.path[0]].foods[action.path[1]]};
-  return  [...goods];
+  return [...goods];
 };
 
 export default function todos(state = initialState, action){

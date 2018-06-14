@@ -55,7 +55,7 @@ const mapDispatchToProps = (dispatch,selfProps)=>{
   return {
     foodCountSet: (count)=>{
       dispatch(goodsAction.setFoodCount(selfProps.path,count));
-      // dispatch(shoppingCartAction.setFoodCount(selfProps.path,count));
+      // (count===0 || count === 1) && dispatch(shoppingCartAction.setFoodCount(selfProps.path));
     }
   }
 }
