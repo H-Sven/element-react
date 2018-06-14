@@ -130,7 +130,7 @@ class Goods extends Component{
                             {food.oldPrice && <span className="old">￥{food.oldPrice}</span>}
                           </div>
                           <div className="cartcontrol-wrapper">
-                            <CartControl food={food}/>
+                            <CartControl path={[index,foodIndex]}/>
                           </div>
                         </div>
                       </li>

@@ -1,1 +1,1 @@
-export const SET_FOOD_COUNT = 'SET_FOOD_COUNT';
+export const ADD_CART = 'ADD_CART';

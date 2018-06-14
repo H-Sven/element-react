@@ -1,11 +1,11 @@
 import * as actions from '../constants/actionType';
-import {deepClone} from '@/sources/utils';
 const initialState = []
 const todosObj = {}
 todosObj[actions.SET_GOODS] = (state, action)=>action.goods;
-todosObj[actions.SET_FOOD_COUNT] = (state, action)=>{
-  action.food.count = action.count;
-  return deepClone(state);
+todosObj[actions.SET_FOOD_COUNT] = (goods, action)=>{
+  goods[action.path[0]].foods[action.path[1]].count  =  action.count;
+  goods[action.path[0]].foods[action.path[1]] = {...goods[action.path[0]].foods[action.path[1]]};
+  return  [...goods];
 };
 
 export default function todos(state = initialState, action){

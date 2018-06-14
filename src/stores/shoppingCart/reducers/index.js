@@ -2,9 +2,14 @@ import * as actions from '../constants/actionType';
 
 const initialState = []
 const todosObj = {}
-todosObj[actions.SET_FOOD_COUNT] = (state, action)=>{
-  if(state.indexOf(action.food) === -1) state.push(action.food);
-  return [...state];
+todosObj[actions.ADD_CART] = (state, action)=>{
+  const path = action.path.join('/');
+  if(action.count === 0) {
+    state.splice(state.indexOf(path),1);
+  } else {
+    state.push(path);
+  }
+  return state;
 };
 
 export default function todos(state = initialState, action){
