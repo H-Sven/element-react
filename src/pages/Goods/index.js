@@ -20,17 +20,24 @@ class Goods extends Component{
     this.setState({
       goods: nextProps.goods
     })
-    this.$nextTick = ()=>{
-      if(this.$refs.menuwrapper){
+    const shouldRefreshScroll = this.shouldRefreshScroll(nextProps.goods);
+    if(shouldRefreshScroll)
+      this.$nextTick = ()=>{
         this._caculateHeight();
-        this._initScroll();
-      };
-    }
+        this.foodsScroll ? this.foodsScroll.refresh() : this._initScroll();
+      }
     
   }
   componentDidUpdate(){
     this.$nextTick && this.$nextTick();
     this.$nextTick = null;
+  }
+  shouldRefreshScroll(goods){
+    if(!goods) return false;
+    const foodNum = goods.reduce((pre,cur)=>cur.foods.length + pre,0);
+    if(this.foodNum === foodNum)return false;
+    this.foodNum = foodNum;
+    return true;
   }
   _initScroll(){
     this.menuScroll = new BScroll(this.$refs.menuwrapper,{

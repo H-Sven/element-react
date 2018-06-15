@@ -10,6 +10,7 @@ class CartControl extends Component {
     this.decreaseCart = this.decreaseCart.bind(this);
   }
   addCart(e){
+    console.log(e, e._constructed);
     // console.log(1);
     let {count} = this.props;
     count = count ? count + 1 : 1;
@@ -19,13 +20,6 @@ class CartControl extends Component {
     let {count} = this.props;
     count = count ? count - 1 : 0;
     this.props.foodCountSet(count);
-  }
-  componentWillReceiveProps(){
-    console.log('componentWillReceiveProps');
-  }
-  shouldComponentUpdate(){
-    console.log('shouldComponentUpdate');
-    return true;
   }
   render(){
     const {count} = this.props;
