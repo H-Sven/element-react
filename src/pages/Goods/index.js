@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import Icon from '@/components/Icon';
 import CartControl from '@/components/CartControl';
 import Shopcart from '@/components/Shopcart';
+import Food from '@/components/Food';
 import BScroll from 'better-scroll';
 import './goods.styl';
 class Goods extends Component{
@@ -13,8 +14,9 @@ class Goods extends Component{
     this.state = {
 			goods: props.goods,
 			scrollY:0,
-      selectedFood:{},
-      currentIndex: 0
+      currentIndex: 0,
+      selectPath: null,
+      foodShow: false
 		}
   }
   componentWillReceiveProps(nextProps){
@@ -83,15 +85,17 @@ class Goods extends Component{
     let foodList = this.$refs.foodswrapper.getElementsByClassName('food-list-hook');
     this.foodsScroll.scrollToElement(foodList[index],200);
   }
-  selectFood(food, event){
-    if(!event._constructed){
-      return;
-    }
-    this.selectedFood = food;
-    this.$refs.food.show();
+  selectFood(path){
+    this.setState({
+      selectPath: path,
+      foodShow: true
+    })
   }
-  
-  
+  foodClose(){
+    this.setState({
+      foodShow: false
+    })
+  }
   render(){
     const {
 			goods,
@@ -99,7 +103,7 @@ class Goods extends Component{
     } = this.state;
     if(!goods)return <div>暂无数据</div>;
     const selectFood = (food,e)=>{this.selectFood(food,e)}
-    const selectMenu = (index,e)=>{this.selectMenu(index,e)}
+    const selectMenu = path=>{this.selectMenu(path)}
     return (
       <div className="goods">
         <div className="menu-wrapper" ref={e=>this.$refs.menuwrapper = e}>
@@ -123,7 +127,7 @@ class Goods extends Component{
                   <ul>
                     { 
                       item.foods.map((food,foodIndex)=>
-                      <li onClick={e=>selectFood(food, e)} className="food-item border-1px" key={`food-${index}-${foodIndex}`}>
+                      <li onClick={e=>selectFood([index,foodIndex])} className="food-item border-1px" key={`food-${index}-${foodIndex}`}>
                         <div className="icon">
                           <img width="57" height="57" src={food.icon} alt="食物图标" />
                         </div>
@@ -150,8 +154,11 @@ class Goods extends Component{
           </ul>
         </div>
         <Shopcart/>
-        {/* 
-        <food food={selectedFood} ref={food=>{this.$refs.food = food}}></food> */}
+        <Food
+          path={this.state.selectPath}
+          foodShow = {this.state.foodShow}
+          foodClose = {()=>this.foodClose()}
+          />
       </div>
     )
   }

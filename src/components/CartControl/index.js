@@ -21,25 +21,27 @@ class CartControl extends Component {
     })
     let count = this.props.count + 1;
     this.props.foodCountSet(count,this.props.count === 0 ? 1 : null);
+    e.stopPropagation();
   }
   decreaseCart(e){
     if(this.props.count === 0)return;
     let count = this.props.count ? this.props.count - 1 : 0;
     this.props.foodCountSet(count, count === 0 ? 0 : null);
+    e.stopPropagation();
   }
   render(){
     const {count} = this.props;
     return (
       <div className="cartcontrol">
         <div
-          className={`cart-decrease ${count > 0 ? 'move-transition' : ''}`} onClick={this.decreaseCart}>
+          className={`cart-decrease ${count > 0 ? 'move-transition' : ''}`} onClick={e=>this.decreaseCart(e)}>
           <span className="inner icon-remove_circle_outline" ></span>
         </div>
         
         <div 
           className="cart-count"
           style={{display: count === 0 && 'none'}}>{count}</div>
-        <div className="cart-add icon-add_circle" onClick={this.addCart}></div>
+        <div className="cart-add icon-add_circle" onClick={e=>this.addCart(e)}></div>
       </div>
     )
   }
