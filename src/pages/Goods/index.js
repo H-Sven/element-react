@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import Icon from '@/components/Icon';
 import CartControl from '@/components/CartControl';
+import Shopcart from '@/components/Shopcart';
 import BScroll from 'better-scroll';
 import './goods.styl';
 class Goods extends Component{
@@ -24,7 +25,7 @@ class Goods extends Component{
     if(shouldRefreshScroll)
       this.$nextTick = ()=>{
         this._caculateHeight();
-        this.foodsScroll ? this.foodsScroll.refresh() : this._initScroll();
+        !this.foodsScroll && this._initScroll();
       }
     
   }
@@ -148,7 +149,8 @@ class Goods extends Component{
             }
           </ul>
         </div>
-        {/* <shopcart ref="shopcart" delivery-price={seller.deliveryPrice} select-foods={selectFoods} min-price={seller.minPrice}></shopcart>
+        <Shopcart/>
+        {/* 
         <food food={selectedFood} ref={food=>{this.$refs.food = food}}></food> */}
       </div>
     )

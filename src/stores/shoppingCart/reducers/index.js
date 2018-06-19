@@ -1,17 +1,19 @@
 import * as actions from '../constants/actionType';
 
-const initialState = []
 const todosObj = {}
+
 todosObj[actions.ADD_CART] = (state, action)=>{
   const path = action.path.join('/');
-  if(action.count === 0) {
+  if(action.remove === 0) {
     state.splice(state.indexOf(path),1);
   } else {
     state.push(path);
   }
+  console.log(state);
   return state;
 };
 
-export default function todos(state = initialState, action){
+todosObj[actions.EMPTY_CART] = ()=>[];
+export default function todos(state = [], action){
   return todosObj[action.type] ? todosObj[action.type](state, action) : state;
 }

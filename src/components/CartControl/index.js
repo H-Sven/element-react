@@ -1,7 +1,8 @@
 import React,{Component} from 'react';
 import {connect} from 'react-redux';
-// import * as shoppingCartAction from '@/stores/shoppingCart/actions';
+import * as shoppingCartAction from '@/stores/shoppingCart/actions';
 import * as goodsAction from '@/stores/goods/actions';
+import Ball from '../Ball';
 import './cartcontrol.styl';
 class CartControl extends Component {
   constructor(props){
@@ -10,16 +11,21 @@ class CartControl extends Component {
     this.decreaseCart = this.decreaseCart.bind(this);
   }
   addCart(e){
-    console.log(e, e._constructed);
-    // console.log(1);
-    let {count} = this.props;
-    count = count ? count + 1 : 1;
-    this.props.foodCountSet(count);
+    const targetRect = e.target.getClientRects()[0];
+    new Ball({
+      x: 30,
+      y: 30
+    },{
+      x: targetRect.left - 16,
+      y: window.innerHeight - targetRect.top - 32
+    })
+    let count = this.props.count + 1;
+    this.props.foodCountSet(count,this.props.count === 0 ? 1 : null);
   }
   decreaseCart(e){
-    let {count} = this.props;
-    count = count ? count - 1 : 0;
-    this.props.foodCountSet(count);
+    if(this.props.count === 0)return;
+    let count = this.props.count ? this.props.count - 1 : 0;
+    this.props.foodCountSet(count, count === 0 ? 0 : null);
   }
   render(){
     const {count} = this.props;
@@ -47,9 +53,13 @@ const mapStateToProps = (state,selfProps)=>{
 }
 const mapDispatchToProps = (dispatch,selfProps)=>{
   return {
-    foodCountSet: (count)=>{
+    foodCountSet: (count,signal)=>{
       dispatch(goodsAction.setFoodCount(selfProps.path,count));
-      // (count===0 || count === 1) && dispatch(shoppingCartAction.setFoodCount(selfProps.path));
+      if(signal === 0){
+        dispatch(shoppingCartAction.addCart(selfProps.path, 0))
+      } else if(signal === 1){
+        dispatch(shoppingCartAction.addCart(selfProps.path, 1))
+      }
     }
   }
 }

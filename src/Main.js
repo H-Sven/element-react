@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import {Provider} from 'react-redux'
 import store from './stores';
 import {setSeller} from './stores/seller/actions';
-import {setGoods} from './stores/goods/actions';
+import {initGoods} from './stores/goods/actions';
 import {setRatings} from './stores/ratings/actions';
 import AppRouters from './router';
 import Header from './components/Header'
@@ -22,7 +22,7 @@ class App extends Component {
       });
       store.dispatch(setSeller(res.seller));
       store.dispatch(setRatings(res.ratings));
-      store.dispatch(setGoods(res.goods));
+      store.dispatch(initGoods(res.goods));
     });
   }
   render() {
