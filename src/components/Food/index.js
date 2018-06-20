@@ -63,7 +63,7 @@ class Food extends Component{
   render(){
     const {food,path} = this.props;
     return (
-      <div className={`food ${this.props.foodShow && 'food-active'}`} ref={el=>this.$refs.food = el}>
+      <div className={`food-warp ${this.props.foodShow && 'food-active'}`} ref={el=>this.$refs.food = el}>
         {food ? 
           <div className="food-content">
             <div className="image-header">

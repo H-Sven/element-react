@@ -21,12 +21,42 @@
     }
   }
 }
-.fade-enter {
-  opacity: 0;
-  z-index: 1;
+.goods,.ratings,.seller{
+  background: #fff;
+}
+.container{
+  width: 100%;
+  overflow hidden;
+}
+.right-sild-enter,
+.right-sild-exit,
+.left-sild-exit,
+.left-sild-enter{
+  position absolute;
+  z-index: 10;
+  transition: all 250ms ease-in;
+  .food-warp {
+    display none
+  }
+}
+.right-sild-enter{
+  transform: translateX(100%);
+}
+.left-sild-enter{
+  transform: translateX(-100%);
+}
+.right-sild-exit,.left-sild-exit{
+  transform: translateX(0);
 }
 
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
+
+.left-sild-enter.left-sild-enter-active,
+.right-sild-enter.right-sild-enter-active {
+  transform: translateX(0);
+}
+.right-sild-exit.right-sild-exit-active{
+  transform: translateX(-100%);
+}
+.left-sild-exit.left-sild-exit-active{
+  transform: translateX(100%);
 }
