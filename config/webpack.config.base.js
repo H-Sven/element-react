@@ -1,5 +1,0 @@
-exports.module = {
-  alias: {
-    '@': '../src'
-  }
-}
