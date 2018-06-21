@@ -1,25 +1,51 @@
 import React from 'react';
 import RouterAnimation from './RouterAnimation';
-import Goods from '../pages/Goods/index';
-import Ratings from '../pages/Ratings';
-import Seller from '../pages/Seller';
+// import Goods from '../pages/Goods/index';
+// import Ratings from '../pages/Ratings';
+// import Seller from '../pages/Seller';
 import {Route, Switch, withRouter} from 'react-router-dom';
 
+import Loadable from 'react-loadable';
+const Loading = ()=><div>Loading</div>
 const RouterConfig = [
   {
     path: '/',
     exact: true,
-    component: Goods
+    component: Loadable({
+      loader: () => import('../pages/Goods/index'),
+      loading: Loading,
+    })
   },
   {
     path: '/ratings',
-    component: Ratings
+    component: Loadable({
+      loader: () => import('../pages/Ratings'),
+      loading: Loading,
+    })
   },
   {
     path: '/seller',
-    component: Seller
+    component: Loadable({
+      loader: () => import('../pages/Seller'),
+      loading: Loading,
+    })
   }
 ]
+// const RouterConfig = [
+//   {
+//     path: '/',
+//     exact: true,
+//     component: Goods
+//   },
+//   {
+//     path: '/ratings',
+//     component: Ratings
+//   },
+//   {
+//     path: '/seller',
+//     component: Seller
+//   }
+// ]
 const pathWeight = {
   '/': 0,
   '/ratings': 1,
