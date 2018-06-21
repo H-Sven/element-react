@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import './icon.css';
+import './icon.styl';
 const classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
 class Icon extends Component {
   render(){
