@@ -7,7 +7,7 @@ import {setRatings} from './stores/ratings/actions';
 import AppRouters from './router';
 import Header from './components/Header'
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   NavLink
 } from 'react-router-dom';
 

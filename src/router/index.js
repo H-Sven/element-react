@@ -3,7 +3,7 @@ import RouterAnimation from './RouterAnimation';
 // import Goods from '../pages/Goods/index';
 // import Ratings from '../pages/Ratings';
 // import Seller from '../pages/Seller';
-import {Route, Switch, withRouter} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import Loadable from 'react-loadable';
 const Loading = ()=><div>Loading</div>
@@ -81,4 +81,4 @@ const AppRouters = props => {
     </Route>
   </div>
 }
-export default withRouter(AppRouters);
+export default AppRouters;
